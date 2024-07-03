@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "958083409910",
+    "project_id": "zeytun-4477b",
+    "storage_bucket": "zeytun-4477b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:958083409910:android:0dc2dcc8c4ab62579689d7",
+        "android_client_info": {
+          "package_name": "az.zeythunpharmacy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "958083409910-5p25eteht9v74vd34o7mnofdq7hm7o4p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUQfjqA-qHo51jWulnDckKOD-yQcDveeI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "958083409910-5p25eteht9v74vd34o7mnofdq7hm7o4p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

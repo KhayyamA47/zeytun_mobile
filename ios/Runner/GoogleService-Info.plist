@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>958083409910-ttk7dh3at1kkaedoa72v1opfm1e873a8.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.958083409910-ttk7dh3at1kkaedoa72v1opfm1e873a8</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDyskns31cEgaXA8JjSJhJG1-ERr9EVEHY</string>
+	<key>GCM_SENDER_ID</key>
+	<string>958083409910</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>az.zeytunpharma.main</string>
+	<key>PROJECT_ID</key>
+	<string>zeytun-4477b</string>
+	<key>STORAGE_BUCKET</key>
+	<string>zeytun-4477b.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:958083409910:ios:f2a859889b05f4fa9689d7</string>
+</dict>
+</plist>

@@ -1,0 +1,24 @@
+import 'package:get/get.dart';
+import 'package:zeytun_app/controller/detail_controller.dart';
+import 'package:zeytun_app/controller/home_controller.dart';
+import 'package:zeytun_app/controller/info_controller.dart';
+import 'package:zeytun_app/controller/login_controller.dart';
+import 'package:zeytun_app/controller/notification_controller.dart';
+import 'package:zeytun_app/controller/photo_controller.dart';
+import 'package:zeytun_app/controller/select_pharmacy_controller.dart';
+import 'package:zeytun_app/controller/settings_controller.dart';
+import 'package:zeytun_app/controller/tema_and_news_controller.dart';
+import 'package:zeytun_app/controller/unregistered_controller.dart';
+import 'package:zeytun_app/controller/worker_controller.dart';
+
+HomeController homeController = Get.find();
+LoginController loginController = Get.find();
+AppealController appealController = Get.find();
+NotificationController notificationController = Get.find();
+DetailController detailController = Get.find();
+InfoController infoController = Get.find();
+UnregisteredController unregisteredController = Get.find();
+SettingsControlle settingsControlle = Get.find();
+SelectPharmacyController selectPharmacyController = Get.find();
+PhotoController photoController = Get.find();
+WorkerController workerController = Get.find();

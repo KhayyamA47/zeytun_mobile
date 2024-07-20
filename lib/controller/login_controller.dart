@@ -30,6 +30,7 @@ class LoginController extends GetxController {
     showLoaderDialog();
     final storage = FlutterSecureStorage();
     final getStorage = GetStorage();
+    log(">>>> ${await getDeviceToken()}");
     if (checkEmail(email.text)) {
       if (password.text.length > 6) {
         var data = {

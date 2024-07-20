@@ -10,6 +10,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:zeytun_app/blinding/blinding.dart';
 import 'package:zeytun_app/core/notification/comfing.dart';
 import 'package:zeytun_app/core/notification/notification.dart';
+import 'package:zeytun_app/global/push_notification_service.dart';
 import 'package:zeytun_app/routes/app_pages.dart';
 
 void main() async {
@@ -19,7 +20,7 @@ void main() async {
   ));
   await GetStorage.init();
   var _getStorage = GetStorage();
-
+  PushNotificationService().initNotification();
   await Firebase.initializeApp();
   await Future.delayed(const Duration(seconds: 1));
 

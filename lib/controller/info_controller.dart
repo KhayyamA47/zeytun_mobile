@@ -70,7 +70,6 @@ class InfoController extends GetxController {
   }
 
   Future getAllInformation(id, list) async {
-    log("////***////"*40);
     log("id => $id");
     list.clear();
     InformationDataSource().getInformation(id).then((value) {

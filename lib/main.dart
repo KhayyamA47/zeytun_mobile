@@ -23,10 +23,7 @@ void main() async {
   PushNotificationService().initNotification();
   await Firebase.initializeApp();
   await Future.delayed(const Duration(seconds: 1));
-
-  getDeviceToken();
   FirebaseMessaging.onBackgroundMessage(firebaseMessageNotification);
-
   await flutterLocalNotificationsPlugin
       .resolvePlatformSpecificImplementation<
           AndroidFlutterLocalNotificationsPlugin>()

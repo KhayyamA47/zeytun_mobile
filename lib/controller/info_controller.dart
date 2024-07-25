@@ -1,6 +1,9 @@
 // ignore_for_file: prefer_is_empty
 
+import 'dart:developer';
+
 import 'package:get/get.dart';
+import 'package:zeytun_app/controller/controller_listner.dart/storage_manegment.dart';
 import 'package:zeytun_app/data/data_source/informatio_data_source.dart';
 
 class InfoController extends GetxController {
@@ -21,6 +24,9 @@ class InfoController extends GetxController {
     waringBool.value = false;
     if (allList.length == 0) {
       getAllInformation(0, allList);
+      infoController.aksiyaList.clear();
+      infoController.newList.clear();
+      infoController.waringList.clear();
     }
   }
 
@@ -31,6 +37,9 @@ class InfoController extends GetxController {
     waringBool.value = false;
     if (aksiyaList.length == 0) {
       getAllInformation(1, aksiyaList);
+      infoController.aksiyaList.clear();
+      infoController.newList.clear();
+      infoController.waringList.clear();
     }
   }
 
@@ -41,6 +50,9 @@ class InfoController extends GetxController {
     waringBool.value = false;
     if (newList.length == 0) {
       getAllInformation(2, newList);
+      infoController.aksiyaList.clear();
+      infoController.allList.clear();
+      infoController.waringList.clear();
     }
   }
 
@@ -51,10 +63,15 @@ class InfoController extends GetxController {
     waringBool.value = true;
     if (waringList.length == 0) {
       getAllInformation(3, waringList);
+      infoController.aksiyaList.clear();
+      infoController.allList.clear();
+      infoController.newList.clear();
     }
   }
 
   Future getAllInformation(id, list) async {
+    log("////***////"*40);
+    log("id => $id");
     list.clear();
     InformationDataSource().getInformation(id).then((value) {
       if (value != null) {

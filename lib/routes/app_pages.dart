@@ -1,12 +1,14 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:get/get.dart';
+import 'package:zeytun_app/UI/chat/thread.dart';
 import 'package:zeytun_app/UI/contact/contact_view.dart';
 import 'package:zeytun_app/UI/detail/debt_more.dart';
 import 'package:zeytun_app/UI/detail/detail_view.dart';
 import 'package:zeytun_app/UI/important_information/important_information_view.dart';
 import 'package:zeytun_app/UI/payments/payments.dart';
 import 'package:zeytun_app/UI/detail/total_debt.dart';
+import 'package:zeytun_app/UI/chat/chat.dart';
 import 'package:zeytun_app/UI/home_page/home.dart';
 import 'package:zeytun_app/UI/login/login.dart';
 import 'package:zeytun_app/UI/notification/notification_view.dart';
@@ -26,7 +28,16 @@ class AppPages {
     page: () => LoginView(),
     binding: binding,
   );
-
+  static final chat = GetPage(
+    name: AppRoutes.CHAT,
+    page: () => const ChatView(),
+    binding: binding,
+  );
+  static final thread = GetPage(
+    name: AppRoutes.THREAD,
+    page: () => const ThreadView(),
+    binding: binding,
+  );
   static final main = GetPage(
     name: AppRoutes.MAIN,
     page: () => const HomeView(),
@@ -91,6 +102,8 @@ class AppPages {
   static final List<GetPage> pages = [
     home,
     main,
+    chat,
+    thread,
     notification,
     detail,
     hesabatdetail,

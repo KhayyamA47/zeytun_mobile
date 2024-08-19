@@ -7,6 +7,8 @@ class AppRoutes {
   static const DETAIL = '/detail';
   static const HESABATDETAIL = '/hesabatDetail';
   static const DEBTMORE = '/debtMore';
+  static const CHAT = '/chat';
+  static const THREAD = '/thread';
   static const PAYMENTS = '/payments';
   static const CONTACT = '/contact';
   static const IMPORTANTINFORMATION = '/info';

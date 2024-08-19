@@ -83,4 +83,5 @@ class DetailController extends GetxController {
     );
     await launchUrl(launchUri);
   }
+
 }

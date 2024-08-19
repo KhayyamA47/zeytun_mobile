@@ -1,20 +1,23 @@
 // ignore_for_file: depend_on_referenced_packages, prefer_interpolation_to_compose_strings, prefer_const_constructors
 
 import 'dart:developer';
-
+import 'package:flutter/foundation.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:zeytun_app/global/button.dart';
 import 'package:zeytun_app/global/project_color.dart';
 import 'package:flutter_html/flutter_html.dart';
-
-Padding listCompanent({required list, required int value}) {
+// import gesture recognizer
+import 'package:flutter/gestures.dart';
+Padding listCompanent({required list, required int value, required scrollController}) {
   // log(list[0].body.toString());
 
   return Padding(
     padding: const EdgeInsets.all(1.0),
     child: SingleChildScrollView(
+      controller: scrollController,
       child: ListView.builder(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
@@ -49,7 +52,10 @@ Padding listCompanent({required list, required int value}) {
                           const SizedBox(height: 8),
                           Padding(
                             padding: const EdgeInsets.only(left: 16),
-                            child: Text(list[index].title,
+                            child:
+                            //check if title is not null
+
+                            Text(list[index].title.toString(),
                                 style: TextStyle(
                                     fontSize: 12,
                                     color: mainColor,
@@ -129,7 +135,7 @@ Future floatingActionNotification(BuildContext context, list, index, value) {
     ),
     builder: (BuildContext context) {
       return DraggableScrollableSheet(
-        initialChildSize: 0.99,
+        initialChildSize: 1,
         builder: (BuildContext context, ScrollController scrollController) {
           return DefaultTabController(
             length: 2,
@@ -154,17 +160,28 @@ Future floatingActionNotification(BuildContext context, list, index, value) {
                           fontSize: 15),
                     ),
                     const SizedBox(height: 20),
-                    value == 1
-                        ? Text(
-                            list[index].body.toString().replaceAll("(<>)", ""))
-                        : Html(
-                            onLinkTap: (url, _, __) async {
-                              log("link $url");
-                              await launchUrl(Uri.parse(url!));
-                            },
-                            shrinkWrap: true,
-                            data: list[index].body ?? '',
+                    //put inside sized box
+                    SizedBox(
+                      height: 200,
+                      child: InAppWebView(
+
+                        gestureRecognizers: Set()..add(Factory <VerticalDragGestureRecognizer>(() => VerticalDragGestureRecognizer())),
+
+                        initialData: InAppWebViewInitialData(data:list[index].body.toString()),
+                        initialOptions: InAppWebViewGroupOptions(
+                            android: AndroidInAppWebViewOptions(
+                              useHybridComposition: true,
+                            ),
+                          crossPlatform: InAppWebViewOptions(
+                            useShouldOverrideUrlLoading: true,
+                            javaScriptCanOpenWindowsAutomatically: true,
+                            javaScriptEnabled: true,
+                            mediaPlaybackRequiresUserGesture: false,
+                            preferredContentMode: UserPreferredContentMode.MOBILE,
                           ),
+                        ),
+                      ),
+                    ),
                     const SizedBox(height: 20),
                     if (list[index].files.isNotEmpty) ...[
                       Row(

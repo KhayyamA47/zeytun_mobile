@@ -5,16 +5,16 @@ import 'dart:developer';
 import 'package:zeytun_app/core/dio/dio_confing.dart';
 import 'package:zeytun_app/core/notwork_path.dart';
 import 'package:zeytun_app/data/model/notification_list.dart';
-
+import 'package:zeytun_app/data/model/information_model.dart';
 class NotificationDataSource {
-  Future<NotificationModel?> getNotifications(page) async {
+  Future<InformationModel?> getNotifications(page) async {
     try {
       var response = await clientDio
           .get("${NetworkPath.NOTIFICATIONS.rawValue}?page=$page");
       if (response.statusCode == 200) {
         log("response notf ${response.data}");
         if (response.data['data'] != null) {
-          return NotificationModel.fromJson(response.data);
+          return InformationModel.fromJson(response.data);
         }
       }
     } catch (e) {

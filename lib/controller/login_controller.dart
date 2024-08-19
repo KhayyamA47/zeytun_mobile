@@ -12,12 +12,36 @@ import 'package:zeytun_app/global/alert_dialog.dart';
 import 'package:zeytun_app/global/check_email.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:zeytun_app/global/loader_dialog.dart';
+import 'package:zeytun_app/data/model/pharmacy_list_model.dart';
+import 'package:zeytun_app/services/user_service.dart';
 
 class LoginController extends GetxController {
   var welcome = "Daxil olmaq".obs;
   var _passType = true.obs;
 
   get passType => _passType;
+  final UserService _userService = UserService();
+  var user = Rxn<PharmacyListModelData>();
+
+  @override
+  void onInit() {
+    super.onInit();
+    _loadUser();
+  }
+
+  Future<void> _loadUser() async {
+    user.value = await _userService.getUser();
+  }
+
+  Future<void> saveUser(PharmacyListModelData user) async {
+    await _userService.saveUser(user);
+    this.user.value = user;
+  }
+
+  Future<void> deleteUser() async {
+    await _userService.deleteUser();
+    user.value = null;
+  }
 
   set passType(newValue) {
     _passType = newValue;
@@ -39,6 +63,8 @@ class LoginController extends GetxController {
         };
         LoginDataSource().login(data).then((value) async {
           if (value != null) {
+            log("login pharmacy => ${value.data!.pharmacy!.toJson()}");
+            saveUser(PharmacyListModelData.fromJson(value.data!.pharmacy!.toJson()));
             await storage.write(key: "token", value: value.data!.accessToken);
             await getStorage.write("login", true);
             if (homeController.pharmacyList.isNotEmpty) {

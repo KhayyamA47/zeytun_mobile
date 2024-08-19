@@ -34,7 +34,7 @@ void main() async {
   await handler();
   runApp(
     GetMaterialApp(
-      debugShowCheckedModeBanner: true,
+      debugShowCheckedModeBanner: false,
       initialBinding: HomeBinding(),
       title: 'Zeytun Pharmacy',
       theme: ThemeData(

@@ -38,40 +38,39 @@ class ImportantInformation extends StatelessWidget {
             Obx(
               () => infoController.allBool.value
                   ? infoController.allList.length == 0
+
                       ? Center(
                           child: CircularProgressIndicator(color: mainColor))
                       : Expanded(
-                          child: SingleChildScrollView(
-                              child:
-                                  listCompanent(list: infoController.allList,value: 1)))
+                          child:
+                                  listCompanent(list: infoController.allList,value: 1,scrollController: infoController.scrollController))
                   : infoController.aksiyaBool.value
                       ? infoController.aksiyaList.length == 0
                           ? Center(
                               child:
                                   CircularProgressIndicator(color: mainColor))
                           : Expanded(
-                              child: SingleChildScrollView(
-                                  child: listCompanent(
-                                      list: infoController.aksiyaList,value: 2)))
+                              child: listCompanent(
+                                      list: infoController.aksiyaList,value: 2,scrollController: infoController.scrollController)
+                              )
                       : infoController.newBool.value
                           ? infoController.newList.length == 0
                               ? Center(
                                   child: CircularProgressIndicator(
                                       color: mainColor))
                               : Expanded(
-                                  child: SingleChildScrollView(
-                                      child: listCompanent(
-                                          list: infoController.newList,value: 1)),
-                                )
+                                  child: listCompanent(
+                                          list: infoController.newList,value: 1,scrollController: infoController.scrollController)
+                                              )
                           : infoController.waringBool.value
                               ? infoController.waringList.length == 0
                                   ? Center(
                                       child: CircularProgressIndicator(
                                           color: mainColor))
                                   : Expanded(
-                                      child: SingleChildScrollView(
-                                          child: listCompanent(
-                                              list: infoController.waringList,value: 2)))
+                                      child: listCompanent(
+                                              list: infoController.waringList,value: 2,scrollController: infoController.scrollController)
+                                )
                               : Container(),
             ),
           ],

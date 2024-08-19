@@ -2,6 +2,8 @@
 
 import 'dart:developer';
 
+import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:html/parser.dart';
@@ -12,14 +14,18 @@ import 'package:zeytun_app/global/drawer.dart';
 import 'package:zeytun_app/global/float_action_button.dart';
 import '../../global/project_color.dart';
 import 'package:flutter_html/flutter_html.dart';
-
+import 'package:flutter_html/flutter_html.dart';
+import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:zeytun_app/global/app_bar_detail.dart';
 class NotificationView extends StatelessWidget {
   const NotificationView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        drawer: ProjectDrower(),
+        // drawer: ProjectDrower(),
         floatingActionButton: CircleAvatar(
             radius: 28,
             backgroundColor: mainColor,
@@ -32,10 +38,8 @@ class NotificationView extends StatelessWidget {
                 color: Colors.white,
               ),
             )),
-        appBar: projectAppBAr(
+        appBar: detailAppBar(
           context,
-          search: false,
-          main: false,
           title: 'Bildirişlər',
         ),
         body: Obx(
@@ -46,7 +50,7 @@ class NotificationView extends StatelessWidget {
                   itemCount: notificationController.notificationList.length,
                   itemBuilder: (context, index) {
                     return InkWell(
-                      onTap: () => floatingActionNotification(context, index),
+                      onTap: () => floatingActionNotification(context, notificationController.notificationList,index),
                       child: Container(
                         padding: const EdgeInsets.all(8),
                         margin: const EdgeInsets.all(8),
@@ -184,60 +188,86 @@ String _parseHtmlString(String htmlString) {
   return parsedString;
 }
 
-Future floatingActionNotification(BuildContext context, index) {
-  log("===> ${notificationController.notificationList[index].toString()}");
+
+Future floatingActionNotification(BuildContext context, list, index) {
+
+  // log("List ${list[index]}");
+  // log("value ${value}");
+  // log("files => ${list[index].files}");
   return showModalBottomSheet(
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(30.0),
-    ),
     isDismissible: true,
     context: context,
-    isScrollControlled: true,
-    useSafeArea: true,
+    // isScrollControlled: true,
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(25.0), topRight: Radius.circular(25.0)),
+    ),
     builder: (BuildContext context) {
-      return DraggableScrollableSheet(
-        initialChildSize: 0.99,
-        builder: (BuildContext context, ScrollController scrollController) {
-          return DefaultTabController(
+      return DefaultTabController(
             length: 2,
             child: Padding(
               padding: const EdgeInsets.only(left: 16, right: 16),
               child: SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 40),
                     Text(
-                      notificationController.notificationList[index].title
-                                  .toString()
-                                  .length <
-                              35
-                          ? notificationController.notificationList[index].title
-                          : notificationController.notificationList[index].title
-                                  .toString()
-                                  .substring(0, 35) +
-                              "...",
+                      list[index].title.toString().length < 35
+                          ? list[index].title
+                          : list[index].title.toString().substring(0, 35) +
+                          "...",
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
-                          color: Color.fromARGB(255, 81, 81, 81),
+                          color: const Color.fromARGB(255, 81, 81, 81),
                           fontWeight: FontWeight.w700,
                           fontSize: 15),
                     ),
                     const SizedBox(height: 20),
-                    Text(_parseHtmlString(notificationController.notificationList[index].body)
-                            .replaceAll("(<>)", "\n") ??
-                        ''),
-                    // Html(
-                    //   shrinkWrap: true,
-                    //   data:
-                    //       notificationController.notificationList[index].body.replaceAll("(<>)","<br>") ??
-                    //           '',
-                    // ),
+                    //put inside sized box
+                    SizedBox(
+                      height: 200,
+                      child: InAppWebView(
+
+                        gestureRecognizers: Set()..add(Factory <VerticalDragGestureRecognizer>(() => VerticalDragGestureRecognizer())),
+
+                        initialData: InAppWebViewInitialData(data:list[index].body.toString()),
+                        initialOptions: InAppWebViewGroupOptions(
+                          android: AndroidInAppWebViewOptions(
+                            useHybridComposition: true,
+                          ),
+                          crossPlatform: InAppWebViewOptions(
+                            useShouldOverrideUrlLoading: true,
+                            javaScriptCanOpenWindowsAutomatically: true,
+                            javaScriptEnabled: true,
+                            mediaPlaybackRequiresUserGesture: false,
+                            preferredContentMode: UserPreferredContentMode.MOBILE,
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    if (list[index]!=null && list[index].files.isNotEmpty) ...[
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(list[index].files[0].name),
+                          IconButton(
+                              onPressed: () async {
+                                String url = list[index].files[0].link;
+                                await launchUrl(Uri.parse(url),
+                                    mode: LaunchMode.externalApplication);
+                              },
+                              icon: Icon(Icons.remove_red_eye))
+                        ],
+                      ),
+                    ],
                     const SizedBox(height: 20),
                     PageButton(
                       onTap: () => Get.back(),
-                      title: 'Bağıa',
+                      title: 'Bağla',
                       color: mainColor,
                     ),
                     const SizedBox(height: 20),
@@ -246,8 +276,6 @@ Future floatingActionNotification(BuildContext context, index) {
               ),
             ),
           );
-        },
-      );
     },
   );
 }

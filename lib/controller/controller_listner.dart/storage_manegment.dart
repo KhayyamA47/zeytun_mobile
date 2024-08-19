@@ -8,9 +8,15 @@ import 'package:zeytun_app/controller/photo_controller.dart';
 import 'package:zeytun_app/controller/select_pharmacy_controller.dart';
 import 'package:zeytun_app/controller/settings_controller.dart';
 import 'package:zeytun_app/controller/tema_and_news_controller.dart';
+import 'package:zeytun_app/controller/thread_controller.dart';
 import 'package:zeytun_app/controller/unregistered_controller.dart';
+import 'package:zeytun_app/controller/user_controller.dart';
 import 'package:zeytun_app/controller/worker_controller.dart';
+import 'package:zeytun_app/controller/chat_controller.dart';
 
+UserController userController = Get.put(UserController());
+ThreadController threadController = Get.put(ThreadController());
+ChatController chatController = Get.put(ChatController());
 HomeController homeController = Get.find();
 LoginController loginController = Get.find();
 AppealController appealController = Get.find();

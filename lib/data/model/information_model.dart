@@ -58,8 +58,8 @@ class InformationModelData {
     senderData = (json['sender_data'] != null)
         ? InformationModelDataSenderData.fromJson(json['sender_data'])
         : null;
+    files = <File>[];
     if (json['files'] != null) {
-      files = <File>[];
       json['files'].forEach((v) {
         files!.add(new File.fromJson(v));
       });

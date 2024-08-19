@@ -13,6 +13,10 @@ enum NetworkPath {
   CONTACT,
   INFO,
   UNREGISTERED,
+  THREAD,
+  MESSAGESLIST,
+  SENDMESSAGE,
+  CREATETHREAD,
   CHANGEPASSWORD
 }
 
@@ -27,6 +31,18 @@ extension StringPathValue on NetworkPath {
         break;
       case NetworkPath.REFRESHTOKEN:
         return 'refresh';
+        break;
+      case NetworkPath.THREAD:
+        return 'thread/list';
+        break;
+      case NetworkPath.MESSAGESLIST:
+        return 'thread/messages';
+        break;
+      case NetworkPath.SENDMESSAGE:
+        return 'thread/send-messages';
+        break;
+      case NetworkPath.CREATETHREAD:
+        return 'thread/send-pharmacy';
         break;
       case NetworkPath.LOGOUT:
         return 'logout';

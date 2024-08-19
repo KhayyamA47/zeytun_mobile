@@ -7,10 +7,10 @@ import 'package:zeytun_app/core/notwork_path.dart';
 import 'package:zeytun_app/data/model/information_model.dart';
 
 class InformationDataSource {
-  Future<InformationModel?> getInformation(category) async {
+  Future<InformationModel?> getInformation(category,{int page=0}) async {
     try {
       var response =
-          await clientDio.get("${NetworkPath.INFO.rawValue}$category");
+          await clientDio.get("${NetworkPath.INFO.rawValue}$category?page=$page");
       if (response.statusCode == 200) {
 
         log("Main response url ${NetworkPath.INFO.rawValue}$category");

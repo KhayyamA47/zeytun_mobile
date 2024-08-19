@@ -16,6 +16,13 @@ class PhotoController extends GetxController {
   var imgName = ''.obs;
   String? imageName1;
 
+  bool removeImage1() {
+    image1 = null;
+    image1chech.value = false;
+    imageName1 = '';
+    imgName.value = '';
+    return true;
+  }
   /// *IMG
   Future picktureImage1() async {
     try {

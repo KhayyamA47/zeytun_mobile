@@ -6,6 +6,7 @@ import 'package:zeytun_app/core/dio/dio_confing.dart';
 import 'package:zeytun_app/global/button.dart';
 import 'package:zeytun_app/global/project_color.dart';
 import 'package:zeytun_app/global/text_field.dart';
+import 'package:zeytun_app/routes/app_routes.dart';
 
 import '../../../controller/controller_listner.dart/storage_manegment.dart';
 
@@ -104,8 +105,18 @@ class MovzuTabView extends StatelessWidget {
                   color: mainColor,
                   title: "YARATMAQ",
                   onTap: () {
-                    getData();
-                    print('object');
+                    //create thread use tema,text and file , attach file
+                    var thread =  chatController.createThread(
+                        appealController.tema.text, appealController.text.text, photoController.imgName.value).then((val){
+                          appealController.tema.clear();
+                          appealController.text.clear();
+                          photoController.removeImage1();
+                          Get.back();
+                          chatController.page=0;
+                          chatController.getChatList(str:"Thread yaratmaq");
+                          Get.toNamed(AppRoutes.CHAT);
+
+                    });
                   },
                 )),
             const SizedBox(height: 10),

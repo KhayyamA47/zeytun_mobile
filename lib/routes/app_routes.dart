@@ -8,6 +8,7 @@ class AppRoutes {
   static const HESABATDETAIL = '/hesabatDetail';
   static const DEBTMORE = '/debtMore';
   static const CHAT = '/chat';
+  static const INVOICES = '/invoices';
   static const THREAD = '/thread';
   static const PAYMENTS = '/payments';
   static const CONTACT = '/contact';

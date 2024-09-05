@@ -1,10 +1,13 @@
 // ignore_for_file: body_might_complete_normally_nullable, avoid_print
 
+import 'dart:developer';
+
 import 'package:zeytun_app/core/dio/dio_confing.dart';
 import 'package:zeytun_app/core/notwork_path.dart';
 import 'package:zeytun_app/data/model/contact_model.dart';
 import 'package:zeytun_app/data/model/debt_model.dart';
 import 'package:zeytun_app/data/model/debt_profit_model.dart';
+import 'package:zeytun_app/data/model/invoices_model.dart';
 import 'package:zeytun_app/data/model/payments_model.dart';
 import 'package:zeytun_app/data/model/total_debt_model.dart';
 
@@ -51,6 +54,7 @@ class DetailDataSource {
   }
 
   Future<PaymentsModel?> getPayments({id}) async {
+    log("url:::: ${"${NetworkPath.PAYMENTS.rawValue}$id"}");
     try {
       var response = await clientDio.get("${NetworkPath.PAYMENTS.rawValue}$id");
       if (response.statusCode == 200) {
@@ -62,7 +66,19 @@ class DetailDataSource {
       print(e);
     }
   }
-
+  Future<Invoices?> getInvoices() async {
+    log("url::::------ ${NetworkPath.INVOICES.rawValue}");
+    try {
+      var response = await clientDio.get(NetworkPath.INVOICES.rawValue);
+      if (response.statusCode == 200) {
+        if (response.data['data'] != null) {
+          return Invoices.fromJson(response.data);
+        }
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
   Future<ContactModel?> getContact() async {
     try {
       var response = await clientDio.get(NetworkPath.CONTACT.rawValue);

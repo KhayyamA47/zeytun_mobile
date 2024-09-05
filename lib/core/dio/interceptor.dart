@@ -14,7 +14,7 @@ class DioInterceptor extends dio.Interceptor {
     dio.RequestOptions options,
     dio.RequestInterceptorHandler handler,
   ) async {
-    final storage = FlutterSecureStorage();
+    const storage = FlutterSecureStorage();
     var token = await storage.read(key: 'token');
     if (token != null) {
       log("token :: $token");
@@ -41,7 +41,7 @@ class DioInterceptor extends dio.Interceptor {
           queryParameters: requestOptions.queryParameters,
         );
 
-        final storage = FlutterSecureStorage();
+        const storage = FlutterSecureStorage();
         final value = await RefreshToken().refreshToken();
         if (value != null) {
           await storage.write(key: "token", value: value.data!.accessToken);

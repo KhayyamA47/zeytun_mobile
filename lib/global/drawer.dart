@@ -97,6 +97,14 @@ class ProjectDrower extends StatelessWidget {
                         Get.back();
                         Get.toNamed("/chat");
                       }),
+                  drawerButton(context,
+                      text: 'Qaimələr',
+                      img: 'iconReports-removebg-preview',
+                      onPress: () {
+                        chatController.getChatList(str:"Drawer");
+                        Get.back();
+                        Get.toNamed("/invoices");
+                      }),
                   drawerButton(context, text: 'Əlaqələr', img: 'ic_contactss',
                       onPress: () {
                     Get.back();

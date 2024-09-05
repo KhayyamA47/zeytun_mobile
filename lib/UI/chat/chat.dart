@@ -31,12 +31,10 @@ class ChatView extends StatelessWidget {
             )),
         body: Column(
           children: [
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Obx(
               () => Container(
-                child: chatController.isLoading == true
-                    ? Center(child: CircularProgressIndicator(color: mainColor))
-                    : (chatController.chatList.isEmpty
+                child:(chatController.chatList.isEmpty
                         ? const Center(
                             child: Text('Açıq mövzu yoxdur!',
                                 style: TextStyle(fontSize: 20)))

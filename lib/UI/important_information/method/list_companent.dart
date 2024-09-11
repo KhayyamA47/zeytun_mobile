@@ -160,7 +160,6 @@ Future floatingActionNotification(BuildContext context, list, index, value) {
                           fontSize: 15),
                     ),
                     const SizedBox(height: 20),
-                    //put inside sized box
                     SizedBox(
                       height: 200,
                       child: InAppWebView(

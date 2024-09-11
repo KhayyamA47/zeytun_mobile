@@ -4,6 +4,7 @@ enum NetworkPath {
   LOGIN,
   LOGOUT,
   INVOICES,
+  INVOICE,
   PHARMACY,
   REFRESHTOKEN,
   NOTIFICATIONS,
@@ -32,6 +33,9 @@ extension StringPathValue on NetworkPath {
         break;
       case NetworkPath.INVOICES:
         return 'pharmacy/qaimeler';
+        break;
+      case NetworkPath.INVOICE:
+        return 'pharmacy/invoice';
         break;
       case NetworkPath.REFRESHTOKEN:
         return 'refresh';

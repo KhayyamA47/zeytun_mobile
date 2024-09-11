@@ -66,6 +66,7 @@ class DetailDataSource {
       print(e);
     }
   }
+
   Future<Invoices?> getInvoices() async {
     log("url::::------ ${NetworkPath.INVOICES.rawValue}");
     try {
@@ -79,6 +80,28 @@ class DetailDataSource {
       print(e);
     }
   }
+
+  Future<String?> getInvoiceDetail(String operation, String type,
+      String amount, String date, String guid) async {
+    log("url::::------ ${NetworkPath.INVOICE.rawValue}");
+    try {
+      var response = await clientDio.post(NetworkPath.INVOICE.rawValue, data: {
+        "Operation": operation,
+        "Type": type,
+        "Amount": amount,
+        "Date": date,
+        "GUID": guid
+      });
+      log("response detail code ${response.statusCode}");
+      log("response detail body ${response.data}");
+      if (response.statusCode == 200) {
+        return response.data["data"];
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
   Future<ContactModel?> getContact() async {
     try {
       var response = await clientDio.get(NetworkPath.CONTACT.rawValue);

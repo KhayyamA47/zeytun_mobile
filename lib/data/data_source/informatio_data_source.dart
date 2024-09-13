@@ -16,7 +16,6 @@ class InformationDataSource {
         log("Main response url ${NetworkPath.INFO.rawValue}$category");
         log("Main response header ${clientDio.options.baseUrl}");
         log("Main response header ${clientDio.options.headers}");
-        log("Main response data ${response.data}");
         if (response.data['data'] != null) {
           return InformationModel.fromJson(response.data);
         }

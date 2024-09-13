@@ -12,63 +12,66 @@ class ThreadView extends StatelessWidget {
         appBar: detailAppBar(context, title: threadController.thread.name),
         body: Column(
           children: [
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Obx(
-              () => Container(
-                //add message send field
-                child: Expanded(
-                  child:Column(
-                  children: [
-                    (threadController.chatList.length == 0)
-                        ? Center(child: CircularProgressIndicator(color: mainColor))
-                        :
-                    threadBox(threadController.chatList),
-                    //send message field fixed to the bottom of screen
-                    Container(
-                      padding: EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10)),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: TextField(
-                              controller: threadController.messageController,
-                              decoration: InputDecoration(
-                                hintText: "Mesaj yazın",
-                                border: InputBorder.none,
-                              ),
+              () => Expanded(
+                child:Column(
+                children: [
+                  (threadController.chatList.isEmpty)
+                      ? Center(
+                      heightFactor: MediaQuery.of(context).size.height*0.02,
+                      child: CircularProgressIndicator(color: mainColor))
+                      :
+                  threadBox(threadController.chatList),
+                 if(threadController.chatList.isEmpty)...[
+                   const Spacer()
+                 ],
+
+                  //send message field fixed to the bottom of screen
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10)),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: TextField(
+                            controller: threadController.messageController,
+                            decoration: const InputDecoration(
+                              hintText: "Mesaj yazın",
+                              border: InputBorder.none,
                             ),
                           ),
-                          IconButton(
-                            icon: const Icon(Icons.attach_file_outlined),
-                            onPressed: () {
-                              photoController.picktureImage1();
-                            },
-                          ),
-                          IconButton(
-                            onPressed: () {
-                              //send message to server
-                              threadController.sendMessage().then((val){
-                                //clear input field
-                                threadController.messageController.clear();
-                                //clear image
-                                photoController.removeImage1();
-                              });
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.attach_file_outlined),
+                          onPressed: () {
+                            photoController.picktureImage1();
+                          },
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            //send message to server
+                            threadController.sendMessage().then((val){
+                              //clear input field
+                              threadController.messageController.clear();
+                              //clear image
+                              photoController.removeImage1();
+                            });
 
-                            },
-                            icon: Icon(Icons.send),
-                          ),
+                          },
+                          icon: Icon(Icons.send),
+                        ),
 
 
-                        ],
-                      ),
+                      ],
                     ),
+                  ),
 
-                  ],
-              ),
-            ),
-        )
+                ],
+                            ),
+                          )
             )])
     );
   }
@@ -113,7 +116,7 @@ Expanded threadBox(list) {
                                 Container(
                                   width: 50,
                                   height: 50,
-                                  decoration: BoxDecoration(
+                                  decoration: const BoxDecoration(
                                       shape: BoxShape.circle,
                                       image: DecorationImage(
                                           image: NetworkImage(
@@ -121,14 +124,16 @@ Expanded threadBox(list) {
                                           fit: BoxFit.cover)),
                                 ),
                                 SizedBox(width: 10),
-                                Container(
-                                  padding: EdgeInsets.all(10),
-                                  decoration: BoxDecoration(
-                                      color: mainColor,
-                                      borderRadius: BorderRadius.circular(10)),
-                                  child: Text(
-                                    list[index].body??'',
-                                    style: TextStyle(color: Colors.white,),
+                                Expanded(
+                                  child: Container(
+                                    padding: EdgeInsets.all(10),
+                                    decoration: BoxDecoration(
+                                        color: mainColor,
+                                        borderRadius: BorderRadius.circular(10)),
+                                    child: Text(
+                                      list[index].body??'',
+                                      style: TextStyle(color: Colors.white,),
+                                    ),
                                   ),
                                 ),
                               ],

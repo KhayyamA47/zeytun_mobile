@@ -34,11 +34,12 @@ class _InvoicesViewState extends State<InvoicesView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: detailAppBar(context, title: "Qaimələr"),
       body: invoices == null
           ? Center(child: CircularProgressIndicator(color: mainColor))
           : ListView.builder(
-        padding: EdgeInsets.symmetric(horizontal: 5.0),
+        padding: const EdgeInsets.symmetric(horizontal: 5.0),
               itemBuilder: (c, i) {
                 final model=invoices!.data!.data![i].attributes;
                 return InkWell(
@@ -47,46 +48,38 @@ class _InvoicesViewState extends State<InvoicesView> {
 
                   },
                   child: Padding(
-                      padding: const EdgeInsets.all(18.0),
+                      padding: const EdgeInsets.only(left: 18.0,top: 8.0),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Icon(Icons.file_open_rounded, color: mainColor),
-                          SizedBox(width: 10),
+                          const SizedBox(width: 20),
                           Expanded(
-                            child: Row(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(model!.operation!),
-                                      SizedBox(height: 5),
-                                      Text(model.amount!),
-                                      SizedBox(height: 5),
-                                      Text(model.type!),
-                                      SizedBox(height: 5),
-                                      Row(
-                                        children: [
-                                          Icon(
-                                            Icons.calendar_month,
-                                            color:
-                                            Color.fromARGB(255, 149, 148, 148),
-                                            size: 20,
-                                          ),
-                                          SizedBox(width: 4),
-                                          Text(model.date!.substring(0,16)),
-                                        ],
-                                      ),
-                                      Container(
-                                        margin: EdgeInsets.only(top: 20),
-                                        width: double.infinity,
-                                        height: 1,
-                                        color: mainColor,
-                                      )
-                                    ],
-                                  ),
+                                Text(model!.operation!),
+                                const SizedBox(height: 5),
+                                Text(model.amount!),
+                                const SizedBox(height: 5),
+                                Row(
+                                  children: [
+                                    const Icon(
+                                      Icons.calendar_month,
+                                      color:
+                                      Color.fromARGB(255, 149, 148, 148),
+                                      size: 20,
+                                    ),
+                                    const SizedBox(width: 4),
+                                    Text(model.date!.substring(0,16)),
+                                  ],
                                 ),
+                                Container(
+                                  margin: const EdgeInsets.only(top: 10),
+                                  width: double.infinity,
+                                  height: 1,
+                                  color: mainColor,
+                                )
                               ],
                             ),
                           ),

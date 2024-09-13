@@ -114,8 +114,6 @@ class InfoController extends GetxController {
       this.page--;
       return;
     }
-    showLoaderDialog();
-
     InformationDataSource().getInformation(id,page: page).then((value) {
       if (value != null) {
         if (value.data!.length == 0) {
@@ -127,7 +125,6 @@ class InfoController extends GetxController {
       } else {
         finish = true;
       }
-      Get.back();
     });
   }
 }

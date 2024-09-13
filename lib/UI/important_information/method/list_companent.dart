@@ -9,9 +9,12 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:zeytun_app/global/button.dart';
 import 'package:zeytun_app/global/project_color.dart';
 import 'package:flutter_html/flutter_html.dart';
+
 // import gesture recognizer
 import 'package:flutter/gestures.dart';
-Padding listCompanent({required list, required int value, required scrollController}) {
+
+Padding listCompanent(
+    {required list, required int value, required scrollController}) {
   // log(list[0].body.toString());
 
   return Padding(
@@ -53,13 +56,13 @@ Padding listCompanent({required list, required int value, required scrollControl
                           Padding(
                             padding: const EdgeInsets.only(left: 16),
                             child:
-                            //check if title is not null
+                                //check if title is not null
 
-                            Text(list[index].title.toString(),
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    color: mainColor,
-                                    fontWeight: FontWeight.w700)),
+                                Text(list[index].title.toString(),
+                                    style: TextStyle(
+                                        fontSize: 12,
+                                        color: mainColor,
+                                        fontWeight: FontWeight.w700)),
                           ),
                           const SizedBox(height: 8),
                           Padding(
@@ -121,7 +124,6 @@ Padding listCompanent({required list, required int value, required scrollControl
 }
 
 Future floatingActionNotification(BuildContext context, list, index, value) {
-
   // log("List ${list[index]}");
   // log("value ${value}");
   // log("files => ${list[index].files}");
@@ -163,38 +165,53 @@ Future floatingActionNotification(BuildContext context, list, index, value) {
                     SizedBox(
                       height: 200,
                       child: InAppWebView(
-
-                        gestureRecognizers: Set()..add(Factory <VerticalDragGestureRecognizer>(() => VerticalDragGestureRecognizer())),
-
-                        initialData: InAppWebViewInitialData(data:list[index].body.toString()),
+                        gestureRecognizers: Set()
+                          ..add(Factory<VerticalDragGestureRecognizer>(
+                              () => VerticalDragGestureRecognizer())),
+                        initialData: InAppWebViewInitialData(
+                            data: list[index].body.toString()),
                         initialOptions: InAppWebViewGroupOptions(
-                            android: AndroidInAppWebViewOptions(
+                          android: AndroidInAppWebViewOptions(
                               useHybridComposition: true,
-                            ),
+                              textZoom: 270,
+                              builtInZoomControls: false),
                           crossPlatform: InAppWebViewOptions(
+                            transparentBackground: true,
                             useShouldOverrideUrlLoading: true,
                             javaScriptCanOpenWindowsAutomatically: true,
                             javaScriptEnabled: true,
                             mediaPlaybackRequiresUserGesture: false,
-                            preferredContentMode: UserPreferredContentMode.MOBILE,
+                            preferredContentMode:
+                                UserPreferredContentMode.MOBILE,
                           ),
                         ),
                       ),
                     ),
                     const SizedBox(height: 20),
                     if (list[index].files.isNotEmpty) ...[
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(list[index].files[0].name),
-                          IconButton(
-                              onPressed: () async {
-                                String url = list[index].files[0].link;
-                                await launchUrl(Uri.parse(url),
-                                    mode: LaunchMode.externalApplication);
-                                },
-                              icon: Icon(Icons.remove_red_eye))
-                        ],
+                      InkWell(
+                        onTap: () async {
+                          String url = list[index].files[0].link;
+                          await launchUrl(Uri.parse(url),
+                              mode: LaunchMode.externalApplication);
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(list[index].files[0].name,
+                                style: TextStyle(
+                                    color: Colors.blue,
+                                    decoration: TextDecoration.underline,
+                                    decorationColor: Colors.blue,
+                                    decorationThickness: 1.8)),
+                            Image.asset(
+                              "assets/zeytun/ic_pdf.png",
+                              height: 24,
+                              width: 20,
+                              fit: BoxFit.cover,
+                            )
+                          ],
+                        ),
                       ),
                     ],
                     const SizedBox(height: 20),

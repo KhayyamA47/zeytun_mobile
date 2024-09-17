@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:zeytun_app/core/dio/dio_confing.dart';
 import 'package:zeytun_app/core/notwork_path.dart';
 import 'package:zeytun_app/data/data_source/chat_data_source.dart';
+import 'package:zeytun_app/data/model/data_model.dart';
 import 'package:zeytun_app/data/model/pharmacy_list_model.dart';
 import 'package:zeytun_app/data/model/reports_model.dart';
 import 'package:zeytun_app/global/overlay_loader.dart';
@@ -20,12 +22,10 @@ class ReportsView extends StatefulWidget {
 
 class _ReportsViewState extends State<ReportsView> {
   ReportsModel? dataModel;
-  // ScrollController? _scrollController;
+
   PharmacyListModelData? user;
   TextEditingController controller = TextEditingController();
   final ItemScrollController _scrollController = ItemScrollController();
-
-
 
   @override
   void initState() {
@@ -64,7 +64,7 @@ class _ReportsViewState extends State<ReportsView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: detailAppBar(context, title: "Hesabatlar"),
+        appBar: detailAppBar(context, title: "Kassa qəbzləri"),
         body: dataModel == null || user == null
             ? const Center(child: CircularProgressIndicator())
             : Column(
@@ -98,12 +98,15 @@ class _ReportsViewState extends State<ReportsView> {
                   .then((value) {
                 if (value != null) {
                   getReposts().then((value) {
+                    if (dataModel!.data!.messages!.isEmpty) {
+                      Get.back();
+                    }
                     ReportsModel data = value;
                     dataModel!.data!.messages!.add(data.data!.messages!.last);
-                    setState(() {
-                    });
-                    _scrollController.scrollTo(index: dataModel!.data!.messages!.length, duration: const Duration(milliseconds: 300));
-
+                    setState(() {});
+                    _scrollController.scrollTo(
+                        index: dataModel!.data!.messages!.length,
+                        duration: const Duration(milliseconds: 300));
                     controller.clear();
                     Loader.hide();
                   });
@@ -137,7 +140,6 @@ class _ReportsViewState extends State<ReportsView> {
       child: ScrollablePositionedList.builder(
         itemCount: list.length,
         itemScrollController: _scrollController,
-
         itemBuilder: (context, index) {
           return Padding(
             padding: const EdgeInsets.all(8.0),

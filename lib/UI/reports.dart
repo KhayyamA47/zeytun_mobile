@@ -99,16 +99,26 @@ class _ReportsViewState extends State<ReportsView> {
                 if (value != null) {
                   getReposts().then((value) {
                     if (dataModel!.data!.messages!.isEmpty) {
-                      Get.back();
+                      getReposts().then((value) {
+                        if (value != null) {
+                          setState(() {
+                            dataModel = value;
+                          });
+                        }
+                      });
+                    }else{
+                      ReportsModel data = value;
+                      dataModel!.data!.messages!.add(data.data!.messages!.last);
                     }
-                    ReportsModel data = value;
-                    dataModel!.data!.messages!.add(data.data!.messages!.last);
+
                     setState(() {});
+                    Loader.hide();
+                    controller.clear();
                     _scrollController.scrollTo(
                         index: dataModel!.data!.messages!.length,
                         duration: const Duration(milliseconds: 300));
-                    controller.clear();
-                    Loader.hide();
+
+
                   });
                 }
               });
@@ -132,20 +142,16 @@ class _ReportsViewState extends State<ReportsView> {
   }
 
   threadBox(list) {
-    log(list.length.toString());
-    // check sender id if it is equal to user id, show it right side, else show left side.
-    // Add avatar to left side
-    // add input field to bottom of the page and send button, when send button clicked, add message to list and send to server
     return Expanded(
       child: ScrollablePositionedList.builder(
         itemCount: list.length,
         itemScrollController: _scrollController,
         itemBuilder: (context, index) {
+
           return Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
               decoration: BoxDecoration(
-                // color: Colors.white,
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Padding(
@@ -153,7 +159,6 @@ class _ReportsViewState extends State<ReportsView> {
                 child: Column(
                   children: [
                     //chat like whatsapp
-
                     if (user != null && list[index].recipient == user!.id)
                       Column(children: [
                         Text(

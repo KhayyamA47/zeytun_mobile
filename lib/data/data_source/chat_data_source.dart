@@ -110,7 +110,6 @@ class ChatDataSource {
 log(response.statusCode.toString());
 log(response.data.toString());
       if (response.statusCode == 200 && response.data != null) {
-        log("TETSTSTTSTST ${MessageModel.fromJson(response.data["data"]["message"])}");
         return MessageModel.fromJson(response.data["data"]["message"]);
       }
     } catch (e) {

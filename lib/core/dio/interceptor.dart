@@ -25,6 +25,9 @@ class DioInterceptor extends dio.Interceptor {
 
   @override
   void onError(dio.DioError err, dio.ErrorInterceptorHandler handler) async {
+    log("err response => ${err.response!.statusCode.toString()}");
+    log("err response => ${err.response}");
+    log("err response dwwdww => ${err.requestOptions.uri}");
     if (err.response?.statusCode == 401) {
       try {
         final dio.RequestOptions requestOptions = err.requestOptions;

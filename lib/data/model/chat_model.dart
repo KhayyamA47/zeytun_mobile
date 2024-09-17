@@ -145,6 +145,11 @@ class MessageModel {
     data['file']['link'] = file;
     return data;
   }
+
+  @override
+  String toString() {
+    return 'MessageModel{id: $id, threadId: $threadId, sender: $sender, recipient: $recipient, body: $body, link: $link, linkTitle: $linkTitle, isRead: $isRead, isThread: $isThread, isFile: $isFile, date: $date, status: $status, delete: $delete, createdAt: $createdAt, updatedAt: $updatedAt, fileId: $fileId, file: $file}';
+  }
 }
 
 // thread class has messages array and following
@@ -186,5 +191,10 @@ class Thread{
     data['updated_at'] = updatedAt;
     data['message'] = message.toJson();
     return data;
+  }
+
+  @override
+  String toString() {
+    return 'Thread{id: $id, name: $name, status: $status, delete: $delete, createdAt: $createdAt, updatedAt: $updatedAt, message: $message}';
   }
 }

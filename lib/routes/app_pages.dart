@@ -13,6 +13,7 @@ import 'package:zeytun_app/UI/chat/chat.dart';
 import 'package:zeytun_app/UI/home_page/home.dart';
 import 'package:zeytun_app/UI/login/login.dart';
 import 'package:zeytun_app/UI/notification/notification_view.dart';
+import 'package:zeytun_app/UI/reports.dart';
 import 'package:zeytun_app/UI/select_pharmacy/select_pharmacy.dart';
 import 'package:zeytun_app/UI/settings/settings.dart';
 import 'package:zeytun_app/UI/worker/worker_view.dart';
@@ -37,6 +38,11 @@ class AppPages {
   static final invoices = GetPage(
     name: AppRoutes.INVOICES,
     page: () => const InvoicesView(),
+    binding: binding,
+  );
+  static final reports = GetPage(
+    name: AppRoutes.REPORTS,
+    page: () => const ReportsView(),
     binding: binding,
   );
   static final thread = GetPage(
@@ -110,6 +116,7 @@ class AppPages {
     main,
     chat,
     invoices,
+    reports,
     thread,
     notification,
     detail,

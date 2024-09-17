@@ -16,6 +16,7 @@ enum NetworkPath {
   INFO,
   UNREGISTERED,
   THREAD,
+  REPORTS,
   MESSAGESLIST,
   SENDMESSAGE,
   CREATETHREAD,
@@ -42,6 +43,8 @@ extension StringPathValue on NetworkPath {
         break;
       case NetworkPath.THREAD:
         return 'thread/list';
+      case NetworkPath.REPORTS:
+        return 'thread/qebzler';
         break;
       case NetworkPath.MESSAGESLIST:
         return 'thread/messages';

@@ -64,8 +64,8 @@ class ThreadController extends GetxController {
           });
     }
   }
-  Future sendMessage() async {
-    ChatDataSource().sendMessage(threadId: thread.id!, message: messageController.text).then((value) {
+  Future sendMessage({id}) async {
+    ChatDataSource().sendMessage(threadId:id ?? thread.id!, message: messageController.text).then((value) {
       log("threadcontroller send message => $value");
       if (value != null) {
         page=0;

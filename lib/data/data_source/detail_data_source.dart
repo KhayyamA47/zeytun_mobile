@@ -54,7 +54,7 @@ class DetailDataSource {
   }
 
   Future<PaymentsModel?> getPayments({id}) async {
-    log("url:::: ${"${NetworkPath.PAYMENTS.rawValue}$id"}");
+    log("url:::: ${"${clientDio.options.baseUrl+NetworkPath.PAYMENTS.rawValue}$id"}");
     try {
       var response = await clientDio.get("${NetworkPath.PAYMENTS.rawValue}$id");
       if (response.statusCode == 200) {
@@ -68,7 +68,7 @@ class DetailDataSource {
   }
 
   Future<Invoices?> getInvoices() async {
-    log("url::::------ ${NetworkPath.INVOICES.rawValue}");
+    log("url::::------ ${clientDio.options.baseUrl+NetworkPath.INVOICES.rawValue}");
     try {
       var response = await clientDio.get(NetworkPath.INVOICES.rawValue);
       if (response.statusCode == 200) {

@@ -9,13 +9,11 @@ import 'package:zeytun_app/data/model/information_model.dart';
 class InformationDataSource {
   Future<InformationModel?> getInformation(category,{int page=0}) async {
     try {
+      log("URL =>  ${clientDio.options.baseUrl+NetworkPath.INFO.rawValue}$category");
       var response =
           await clientDio.get("${NetworkPath.INFO.rawValue}$category?page=$page");
       if (response.statusCode == 200) {
 
-        log("Main response url ${NetworkPath.INFO.rawValue}$category");
-        log("Main response header ${clientDio.options.baseUrl}");
-        log("Main response header ${clientDio.options.headers}");
         if (response.data['data'] != null) {
           return InformationModel.fromJson(response.data);
         }

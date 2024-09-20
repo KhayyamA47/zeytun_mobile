@@ -23,6 +23,10 @@ class InfoController extends GetxController {
   var page = 0;
   var finish=false;
   void onInit() {
+    allList.clear();
+    aksiyaList.clear();
+    newList.clear();
+    waringList.clear();
     getAllInformation(0, allList);
     allBool.value = true;
     aksiyaBool.value = false;
@@ -55,6 +59,14 @@ class InfoController extends GetxController {
     aksiyaBool.value = false;
     newBool.value = false;
     waringBool.value = false;
+    infoController.allList.clear();
+    infoController.aksiyaList.clear();
+    infoController.newList.clear();
+    infoController.waringList.clear();
+    allList.clear();
+    aksiyaList.clear();
+    newList.clear();
+    waringList.clear();
     if (allList.length == 0) {
       getAllInformation(0, allList,page: page);
       infoController.aksiyaList.clear();
@@ -70,6 +82,14 @@ class InfoController extends GetxController {
     aksiyaBool.value = true;
     newBool.value = false;
     waringBool.value = false;
+    infoController.allList.clear();
+    infoController.aksiyaList.clear();
+    infoController.newList.clear();
+    infoController.waringList.clear();
+    allList.clear();
+    aksiyaList.clear();
+    newList.clear();
+    waringList.clear();
     if (aksiyaList.length == 0) {
       getAllInformation(1, aksiyaList);
       infoController.aksiyaList.clear();
@@ -85,6 +105,14 @@ class InfoController extends GetxController {
     aksiyaBool.value = false;
     newBool.value = true;
     waringBool.value = false;
+    infoController.allList.clear();
+    infoController.aksiyaList.clear();
+    infoController.newList.clear();
+    infoController.waringList.clear();
+    allList.clear();
+    aksiyaList.clear();
+    newList.clear();
+    waringList.clear();
     if (newList.length == 0) {
       getAllInformation(2, newList);
       infoController.aksiyaList.clear();
@@ -100,6 +128,14 @@ class InfoController extends GetxController {
     aksiyaBool.value = false;
     newBool.value = false;
     waringBool.value = true;
+    infoController.allList.clear();
+    infoController.aksiyaList.clear();
+    infoController.newList.clear();
+    infoController.waringList.clear();
+    allList.clear();
+    aksiyaList.clear();
+    newList.clear();
+    waringList.clear();
     if (waringList.length == 0) {
       getAllInformation(3, waringList);
       infoController.aksiyaList.clear();
@@ -109,7 +145,6 @@ class InfoController extends GetxController {
   }
 
   Future getAllInformation(id, list,{page=0}) async {
-    log("id => $id");
     if (finish == true) {
       this.page--;
       return;

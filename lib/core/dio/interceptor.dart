@@ -17,7 +17,7 @@ class DioInterceptor extends dio.Interceptor {
     const storage = FlutterSecureStorage();
     var token = await storage.read(key: 'token');
     if (token != null) {
-      log("token :: $token");
+      // log("token :: $token");
       options.headers['Authorization'] = "Bearer $token";
     }
     handler.next(options);

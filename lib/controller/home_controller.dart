@@ -1,10 +1,13 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:zeytun_app/data/data_source/pharmacy_data_source.dart';
 import 'package:zeytun_app/global/loader_dialog.dart';
+import 'package:zeytun_app/util.dart';
 
 class HomeController extends GetxController {
   final ScrollController scrollController = ScrollController();
@@ -18,9 +21,16 @@ class HomeController extends GetxController {
 
   Future<void> getPharmacyList() async {
     var storage = GetStorage();
+    // toastMessage(storage.read('login').toString());
+    // const storage2 = FlutterSecureStorage();
+    // var token = await storage2.read(key: 'token');
+
     if (storage.read('login') == true) {
       pharmacyList.clear();
       PharmacyDataSource().getList(page.value, searchText.value).then((value) {
+        log("******00000****** vv ${page.value}");
+        log("******00000****** ss ${searchText.value}");
+
         if (value != null) {
           for (var i = 0; i < value.data!.length; i++) {
             pharmacyList.add(value.data![i]);

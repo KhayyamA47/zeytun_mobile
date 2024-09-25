@@ -8,6 +8,7 @@ import 'package:zeytun_app/controller/controller_listner.dart/storage_manegment.
 import 'package:zeytun_app/core/notwork_path.dart';
 import 'package:zeytun_app/global/project_color.dart';
 import "package:flutter_secure_storage/flutter_secure_storage.dart";
+import 'package:zeytun_app/services/user_service.dart';
 
 import '../core/dio/dio_confing.dart';
 
@@ -160,6 +161,8 @@ class ProjectDrower extends StatelessWidget {
 
                                   await storage.delete(key: "token");
                                   getStorage.remove("login");
+                                  final userService=UserService();
+                                  userService.deleteUser();
                                   Navigator.of(context).pushAndRemoveUntil(
                                       MaterialPageRoute(
                                           builder: (context) => LoginView()),

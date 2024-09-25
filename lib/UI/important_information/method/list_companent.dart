@@ -188,31 +188,62 @@ Future floatingActionNotification(BuildContext context, list, index, value) {
                       ),
                     ),
                     const SizedBox(height: 20),
+
+
                     if (list[index].files.isNotEmpty) ...[
-                      InkWell(
-                        onTap: () async {
-                          String url = list[index].files[0].link;
-                          await launchUrl(Uri.parse(url),
-                              mode: LaunchMode.externalApplication);
-                        },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(list[index].files[0].name,
-                                style: TextStyle(
-                                    color: Colors.blue,
-                                    decoration: TextDecoration.underline,
-                                    decorationColor: Colors.blue,
-                                    decorationThickness: 1.8)),
-                            Image.asset(
-                              "assets/zeytun/ic_pdf.png",
-                              height: 24,
-                              width: 20,
-                              fit: BoxFit.cover,
-                            )
-                          ],
-                        ),
-                      ),
+                      ...list[index].files.map((item) {
+                        return InkWell(
+                                onTap: () async {
+                                  String url = item.link;
+                                  await launchUrl(Uri.parse(url),
+                                      mode: LaunchMode.externalApplication);
+                                },
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(item.name,
+                                        style: TextStyle(
+                                            color: Colors.blue,
+                                            decoration: TextDecoration.underline,
+                                            decorationColor: Colors.blue,
+                                            decorationThickness: 1.8)),
+                                    Image.asset(
+                                      "assets/zeytun/ic_pdf.png",
+                                      height: 24,
+                                      width: 20,
+                                      fit: BoxFit.cover,
+                                    )
+                                  ],
+                                ),
+                              );
+                      }).toList(),
+  // List.generate(items.length, (index) {
+  //   return   InkWell(
+  //     onTap: () async {
+  //       String url = list[index].files[0].link;
+  //       await launchUrl(Uri.parse(url),
+  //           mode: LaunchMode.externalApplication);
+  //     },
+  //     child: Row(
+  //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //       children: [
+  //         Text(list[index].files[0].name,
+  //             style: TextStyle(
+  //                 color: Colors.blue,
+  //                 decoration: TextDecoration.underline,
+  //                 decorationColor: Colors.blue,
+  //                 decorationThickness: 1.8)),
+  //         Image.asset(
+  //           "assets/zeytun/ic_pdf.png",
+  //           height: 24,
+  //           width: 20,
+  //           fit: BoxFit.cover,
+  //         )
+  //       ],
+  //     ),
+  //   )
+  //           }),
+
                     ],
                     const SizedBox(height: 20),
                     PageButton(

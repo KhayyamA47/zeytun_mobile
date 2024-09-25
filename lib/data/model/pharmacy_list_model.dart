@@ -185,6 +185,11 @@ class PharmacyListModelData {
     }
     return data;
   }
+
+  @override
+  String toString() {
+    return 'PharmacyListModelData{id: $id, fcmToken: $fcmToken, type: $type, regionId: $regionId, email: $email, password: $password, name: $name, code: $code, voen: $voen, address: $address, totalDebtPharmacy: $totalDebtPharmacy, balance: $balance, totalDebtWarehouse: $totalDebtWarehouse, currency: $currency, status: $status, isLogin: $isLogin, createdAt: $createdAt, updatedAt: $updatedAt, delete: $delete, lastLoginDate: $lastLoginDate, region: $region}';
+  }
 }
 
 class PharmacyListModel {
@@ -257,5 +262,10 @@ class PharmacyListModel {
     }
     data['errors'] = errors;
     return data;
+  }
+
+  @override
+  String toString() {
+    return 'PharmacyListModel{data: $data, errors: $errors}';
   }
 }

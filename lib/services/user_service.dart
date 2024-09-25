@@ -15,13 +15,13 @@ class UserService{
 
   Future<void> saveUser(PharmacyListModelData user) async {
     String userJson = jsonEncode(user.toJson());
-    log("userJson => $userJson");
+    log("userJson =+> $userJson");
     await _storage.write(key: _userKey, value: userJson);
   }
 
   Future<PharmacyListModelData?> getUser() async {
     String? userJson = await _storage.read(key: _userKey);
-    log("userJson => $userJson");
+    log("userJson =#> $userJson");
     if (userJson != null) {
       Map<String, dynamic> userMap = jsonDecode(userJson);
       return PharmacyListModelData.fromJson(userMap);

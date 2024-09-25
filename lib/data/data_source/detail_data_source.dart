@@ -27,6 +27,8 @@ class DetailDataSource {
   }
 
   Future<DebtProfitModel?> getDebtProfit({id}) async {
+
+    log("===####>https://appzeytunpharm.az/api/${NetworkPath.DEBTPROFIT.rawValue} ");
     try {
       var response =
           await clientDio.get("${NetworkPath.DEBTPROFIT.rawValue}$id");

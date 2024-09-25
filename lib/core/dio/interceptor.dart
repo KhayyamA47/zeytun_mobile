@@ -7,6 +7,9 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:zeytun_app/core/dio/dio_confing.dart';
 import 'package:zeytun_app/data/data_source/refresh_token.dart';
+import 'package:zeytun_app/services/user_service.dart';
+import 'package:zeytun_app/util.dart';
+final _userService = UserService();
 
 class DioInterceptor extends dio.Interceptor {
   @override
@@ -28,6 +31,11 @@ class DioInterceptor extends dio.Interceptor {
     log("err response => ${err.response!.statusCode.toString()}");
     log("err response => ${err.response}");
     log("err response dwwdww => ${err.requestOptions.uri}");
+      Get.defaultDialog(
+          title: err.requestOptions.uri.toString(), middleText: '${err.response!.statusCode}\n\n\n${err.response}');
+      // toastMessage(
+      //     "${err.requestOptions.uri}\n${err.response!.statusCode}\n${err.response}");
+
     if (err.response?.statusCode == 401) {
       try {
         final dio.RequestOptions requestOptions = err.requestOptions;
@@ -50,6 +58,11 @@ class DioInterceptor extends dio.Interceptor {
           await storage.write(key: "token", value: value.data!.accessToken);
           cloneOptions.headers['Authorization'] =
               "Bearer ${value.data!.accessToken}";
+          final user = await _userService.getUser();
+          if (user!.name == '72 Abşeron'||user.name == '34 Abşeron') {
+            toastMessage("Refreshed token ${value.data!.accessToken}");
+          }
+
         }
 
         final response = await clientDio.request(
@@ -77,7 +90,6 @@ class DioInterceptor extends dio.Interceptor {
     }
   }
 }
-
 
 // class DioInterceptor extends dio.Interceptor {
 //   @override
@@ -134,10 +146,6 @@ class DioInterceptor extends dio.Interceptor {
 //     }
 //   }
 // }
-
-
-
-
 
 // class DioInterceptor extends dio.Interceptor {
 //   @override

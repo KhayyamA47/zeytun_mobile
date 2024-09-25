@@ -54,7 +54,11 @@ class HomeView extends StatelessWidget {
             Obx(
               () => Container(
                 child: homeController.pharmacyList.length == 0
-                    ? Center(child: CircularProgressIndicator(color: mainColor))
+                    ? Center(
+                        child: Padding(
+                          padding:  EdgeInsets.only(top: MediaQuery.of(context).size.height*0.4),
+                          child: CircularProgressIndicator(color: Colors.black),
+                        ))
                     : homeController.searchText.value.length != 0
                         ? pharmacyList(homeController.searchList)
                         : pharmacyList(homeController.pharmacyList),

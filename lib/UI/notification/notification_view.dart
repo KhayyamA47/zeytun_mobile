@@ -223,39 +223,90 @@ Future floatingActionNotification(BuildContext context, list, index) {
                     SizedBox(
                       height: 200,
                       child: InAppWebView(
-
-                        gestureRecognizers: Set()..add(Factory <VerticalDragGestureRecognizer>(() => VerticalDragGestureRecognizer())),
-
-                        initialData: InAppWebViewInitialData(data:list[index].body.toString()),
+                        gestureRecognizers: Set()
+                          ..add(Factory<VerticalDragGestureRecognizer>(
+                                  () => VerticalDragGestureRecognizer())),
+                        initialData: InAppWebViewInitialData(
+                            data: list[index].body.toString()),
                         initialOptions: InAppWebViewGroupOptions(
                           android: AndroidInAppWebViewOptions(
-                            useHybridComposition: true,
-                          ),
+                              useHybridComposition: true,
+                              textZoom: 80,
+                              builtInZoomControls: false),
                           crossPlatform: InAppWebViewOptions(
+                            transparentBackground: true,
                             useShouldOverrideUrlLoading: true,
                             javaScriptCanOpenWindowsAutomatically: true,
                             javaScriptEnabled: true,
                             mediaPlaybackRequiresUserGesture: false,
-                            preferredContentMode: UserPreferredContentMode.MOBILE,
+                            preferredContentMode:
+                            UserPreferredContentMode.MOBILE,
                           ),
                         ),
                       ),
                     ),
                     const SizedBox(height: 20),
-                    if (list[index]!=null && list[index].files.isNotEmpty) ...[
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(list[index].files[0].name),
-                          IconButton(
-                              onPressed: () async {
-                                String url = list[index].files[0].link;
-                                await launchUrl(Uri.parse(url),
-                                    mode: LaunchMode.externalApplication);
-                              },
-                              icon: Icon(Icons.remove_red_eye))
-                        ],
-                      ),
+                    if (list[index].files.isNotEmpty) ...[
+                      ...list[index].files.map((item) {
+                        return InkWell(
+                          onTap: () async {
+                            String url = item.link;
+                            await launchUrl(Uri.parse(url),
+                                mode: LaunchMode.externalApplication);
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(item.name,
+                                  style: TextStyle(
+                                      color: Colors.blue,
+                                      decoration: TextDecoration.underline,
+                                      decorationColor: Colors.blue,
+                                      decorationThickness: 1.8)),
+                              item.name
+                                  .toString()
+                                  .substring(item.name.length - 3)
+                                  .contains("pdf")
+                                  ? Image.asset(
+                                "assets/zeytun/ic_pdf.png",
+                                height: 24,
+                                width: 20,
+                                fit: BoxFit.cover,
+                              )
+                                  : Icon(
+                                Icons.remove_red_eye,
+                                color: Colors.blue,
+                              )
+                            ],
+                          ),
+                        );
+                      }).toList(),
+                      // List.generate(items.length, (index) {
+                      //   return   InkWell(
+                      //     onTap: () async {
+                      //       String url = list[index].files[0].link;
+                      //       await launchUrl(Uri.parse(url),
+                      //           mode: LaunchMode.externalApplication);
+                      //     },
+                      //     child: Row(
+                      //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //       children: [
+                      //         Text(list[index].files[0].name,
+                      //             style: TextStyle(
+                      //                 color: Colors.blue,
+                      //                 decoration: TextDecoration.underline,
+                      //                 decorationColor: Colors.blue,
+                      //                 decorationThickness: 1.8)),
+                      //         Image.asset(
+                      //           "assets/zeytun/ic_pdf.png",
+                      //           height: 24,
+                      //           width: 20,
+                      //           fit: BoxFit.cover,
+                      //         )
+                      //       ],
+                      //     ),
+                      //   )
+                      //           }),
                     ],
                     const SizedBox(height: 20),
                     PageButton(

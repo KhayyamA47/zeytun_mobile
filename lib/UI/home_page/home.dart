@@ -57,7 +57,7 @@ class HomeView extends StatelessWidget {
                     ? Center(
                         child: Padding(
                           padding:  EdgeInsets.only(top: MediaQuery.of(context).size.height*0.4),
-                          child: CircularProgressIndicator(color: Colors.black),
+                          child: CircularProgressIndicator(color: mainColor),
                         ))
                     : homeController.searchText.value.length != 0
                         ? pharmacyList(homeController.searchList)

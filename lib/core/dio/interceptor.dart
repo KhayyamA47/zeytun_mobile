@@ -31,11 +31,6 @@ class DioInterceptor extends dio.Interceptor {
     log("err response => ${err.response!.statusCode.toString()}");
     log("err response => ${err.response}");
     log("err response dwwdww => ${err.requestOptions.uri}");
-      Get.defaultDialog(
-          title: err.requestOptions.uri.toString(), middleText: '${err.response!.statusCode}\n\n\n${err.response}');
-      // toastMessage(
-      //     "${err.requestOptions.uri}\n${err.response!.statusCode}\n${err.response}");
-
     if (err.response?.statusCode == 401) {
       try {
         final dio.RequestOptions requestOptions = err.requestOptions;

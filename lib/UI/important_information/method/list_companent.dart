@@ -126,7 +126,6 @@ Padding listCompanent(
 Future floatingActionNotification(BuildContext context, list, index, value) {
   // log("List ${list[index]}");
   // log("value ${value}");
-  // log("files => ${list[index].files}");
   return showModalBottomSheet(
     isDismissible: true,
     context: context,
@@ -188,62 +187,67 @@ Future floatingActionNotification(BuildContext context, list, index, value) {
                       ),
                     ),
                     const SizedBox(height: 20),
-
-
                     if (list[index].files.isNotEmpty) ...[
                       ...list[index].files.map((item) {
                         return InkWell(
-                                onTap: () async {
-                                  String url = item.link;
-                                  await launchUrl(Uri.parse(url),
-                                      mode: LaunchMode.externalApplication);
-                                },
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(item.name,
-                                        style: TextStyle(
-                                            color: Colors.blue,
-                                            decoration: TextDecoration.underline,
-                                            decorationColor: Colors.blue,
-                                            decorationThickness: 1.8)),
-                                    Image.asset(
+                          onTap: () async {
+                            String url = item.link;
+                            await launchUrl(Uri.parse(url),
+                                mode: LaunchMode.externalApplication);
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(item.name,
+                                  style: TextStyle(
+                                      color: Colors.blue,
+                                      decoration: TextDecoration.underline,
+                                      decorationColor: Colors.blue,
+                                      decorationThickness: 1.8)),
+                              item.name
+                                      .toString()
+                                      .substring(item.name.length - 3)
+                                      .contains("pdf")
+                                  ? Image.asset(
                                       "assets/zeytun/ic_pdf.png",
                                       height: 24,
                                       width: 20,
                                       fit: BoxFit.cover,
                                     )
-                                  ],
-                                ),
-                              );
+                                  : Icon(
+                                      Icons.remove_red_eye,
+                                      color: Colors.blue,
+                                    )
+                            ],
+                          ),
+                        );
                       }).toList(),
-  // List.generate(items.length, (index) {
-  //   return   InkWell(
-  //     onTap: () async {
-  //       String url = list[index].files[0].link;
-  //       await launchUrl(Uri.parse(url),
-  //           mode: LaunchMode.externalApplication);
-  //     },
-  //     child: Row(
-  //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //       children: [
-  //         Text(list[index].files[0].name,
-  //             style: TextStyle(
-  //                 color: Colors.blue,
-  //                 decoration: TextDecoration.underline,
-  //                 decorationColor: Colors.blue,
-  //                 decorationThickness: 1.8)),
-  //         Image.asset(
-  //           "assets/zeytun/ic_pdf.png",
-  //           height: 24,
-  //           width: 20,
-  //           fit: BoxFit.cover,
-  //         )
-  //       ],
-  //     ),
-  //   )
-  //           }),
-
+                      // List.generate(items.length, (index) {
+                      //   return   InkWell(
+                      //     onTap: () async {
+                      //       String url = list[index].files[0].link;
+                      //       await launchUrl(Uri.parse(url),
+                      //           mode: LaunchMode.externalApplication);
+                      //     },
+                      //     child: Row(
+                      //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //       children: [
+                      //         Text(list[index].files[0].name,
+                      //             style: TextStyle(
+                      //                 color: Colors.blue,
+                      //                 decoration: TextDecoration.underline,
+                      //                 decorationColor: Colors.blue,
+                      //                 decorationThickness: 1.8)),
+                      //         Image.asset(
+                      //           "assets/zeytun/ic_pdf.png",
+                      //           height: 24,
+                      //           width: 20,
+                      //           fit: BoxFit.cover,
+                      //         )
+                      //       ],
+                      //     ),
+                      //   )
+                      //           }),
                     ],
                     const SizedBox(height: 20),
                     PageButton(

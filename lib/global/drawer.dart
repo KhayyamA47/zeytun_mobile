@@ -123,12 +123,12 @@ class ProjectDrower extends StatelessWidget {
                 ],
               ),
               Positioned.fill(
-                  bottom: 32,
+                  bottom: 2,
                   child: Align(
                       alignment: Alignment.bottomCenter,
                       child: Container(
                           width: double.infinity,
-                          height: 80,
+                          height: 93,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -182,6 +182,10 @@ class ProjectDrower extends StatelessWidget {
                                           TextStyle(color: Color(0xFF828297))),
                                 ]),
                               ),
+                              Padding(
+                                padding:  EdgeInsets.only(left: 32,top: 12),
+                                child: Text("v 2.2.9"),
+                              )
                             ],
                           )))),
             ],

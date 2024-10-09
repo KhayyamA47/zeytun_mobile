@@ -53,10 +53,7 @@ class DioInterceptor extends dio.Interceptor {
           await storage.write(key: "token", value: value.data!.accessToken);
           cloneOptions.headers['Authorization'] =
               "Bearer ${value.data!.accessToken}";
-          final user = await _userService.getUser();
-          if (user!.name == '72 Abşeron'||user.name == '34 Abşeron') {
-            toastMessage("Refreshed token ${value.data!.accessToken}");
-          }
+
 
         }
 

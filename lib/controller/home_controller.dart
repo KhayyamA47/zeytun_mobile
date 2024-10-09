@@ -28,9 +28,6 @@ class HomeController extends GetxController {
     if (storage.read('login') == true) {
       pharmacyList.clear();
       PharmacyDataSource().getList(page.value, searchText.value).then((value) {
-        log("******00000****** vv ${page.value}");
-        log("******00000****** ss ${searchText.value}");
-
         if (value != null) {
           for (var i = 0; i < value.data!.length; i++) {
             pharmacyList.add(value.data![i]);

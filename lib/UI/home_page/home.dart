@@ -1,21 +1,36 @@
 // ignore_for_file: depend_on_referenced_packages, avoid_unnecessary_containers, prefer_const_constructors, prefer_is_empty
 
+import 'dart:developer';
+
+import 'package:app_version_update/app_version_update.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:zeytun_app/controller/controller_listner.dart/storage_manegment.dart';
 import 'package:zeytun_app/global/drawer.dart';
+import 'package:zeytun_app/util.dart';
 
 import '../../global/app_bar.dart';
 import '../../global/float_action_button.dart';
 import '../../global/project_color.dart';
 
-class HomeView extends StatelessWidget {
+class HomeView extends StatefulWidget {
   const HomeView({super.key});
+
+  @override
+  State<HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
+  @override
+  void initState() {
+    super.initState();
+    checkVersion(context);
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        drawer: ProjectDrower(),
+        drawer:  ProjectDrower(),
         floatingActionButton: CircleAvatar(
             radius: 28,
             backgroundColor: mainColor,
@@ -33,32 +48,15 @@ class HomeView extends StatelessWidget {
         body: Column(
           children: [
             SizedBox(height: 10),
-            // Padding(
-            //     padding: const EdgeInsets.only(
-            //         top: 10.0, left: 16, right: 16, bottom: 10),
-            //     child: TextFieldWidget(
-            //         isCollapsed: false,
-            //         aboutPadding: true,
-            //         borderBlack: true,
-            //         onChange: true,
-            //         fieldController: homeController.search,
-            //         contentPaddingBottom: 15,
-            //         maxLines: 1,
-            //         prefixIcon: const Icon(Icons.search),
-            //         suffix: Icon(Icons.filter_alt, color: mainColor),
-            //         hintText: 'Search',
-            //         keyboardType: TextInputType.text,
-            //         contentPadding: 10,
-            //         textInputAction: TextInputAction.done,
-            //         colorIn: const Color(0xFFe3e3e5))),
             Obx(
               () => Container(
                 child: homeController.pharmacyList.length == 0
                     ? Center(
                         child: Padding(
-                          padding:  EdgeInsets.only(top: MediaQuery.of(context).size.height*0.4),
-                          child: CircularProgressIndicator(color: mainColor),
-                        ))
+                        padding: EdgeInsets.only(
+                            top: MediaQuery.of(context).size.height * 0.4),
+                        child: CircularProgressIndicator(color: mainColor),
+                      ))
                     : homeController.searchText.value.length != 0
                         ? pharmacyList(homeController.searchList)
                         : pharmacyList(homeController.pharmacyList),

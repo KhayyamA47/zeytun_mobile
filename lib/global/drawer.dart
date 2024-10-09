@@ -1,5 +1,7 @@
 // ignore_for_file: avoid_unnecessary_containers, sized_box_for_whitespace, prefer_const_constructors, use_build_context_synchronously, depend_on_referenced_packages
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -9,6 +11,7 @@ import 'package:zeytun_app/core/notwork_path.dart';
 import 'package:zeytun_app/global/project_color.dart';
 import "package:flutter_secure_storage/flutter_secure_storage.dart";
 import 'package:zeytun_app/services/user_service.dart';
+import 'package:zeytun_app/util.dart';
 
 import '../core/dio/dio_confing.dart';
 
@@ -19,6 +22,7 @@ class ProjectDrower extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    checkVersion(context);
     return Container(
       width: MediaQuery.of(context).size.width * 0.7,
       height: MediaQuery.of(context).size.height,
@@ -167,8 +171,7 @@ class ProjectDrower extends StatelessWidget {
                                       MaterialPageRoute(
                                           builder: (context) => LoginView()),
                                       (route) => false);
-                                  await clientDio
-                                      .post(NetworkPath.LOGOUT.rawValue);
+                                  await clientDio.post(NetworkPath.LOGOUT.rawValue);
                                 },
                                 child: Row(children: [
                                   Image.asset(
@@ -184,7 +187,7 @@ class ProjectDrower extends StatelessWidget {
                               ),
                               Padding(
                                 padding:  EdgeInsets.only(left: 32,top: 12),
-                                child: Text("v 2.2.9"),
+                                child: Text("v 2.3.0"),
                               )
                             ],
                           )))),

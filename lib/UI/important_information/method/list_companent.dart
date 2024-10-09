@@ -126,6 +126,7 @@ Padding listCompanent(
 Future floatingActionNotification(BuildContext context, list, index, value) {
   // log("List ${list[index]}");
   // log("value ${value}");
+  // log("files: ${list[index].files}");
   return showModalBottomSheet(
     isDismissible: true,
     context: context,

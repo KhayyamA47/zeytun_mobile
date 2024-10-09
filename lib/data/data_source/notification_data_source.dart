@@ -12,7 +12,6 @@ class NotificationDataSource {
       var response = await clientDio
           .get("${NetworkPath.NOTIFICATIONS.rawValue}?page=$page");
       if (response.statusCode == 200) {
-        log("response notf ${response.data}");
         if (response.data['data'] != null) {
           return InformationModel.fromJson(response.data);
         }

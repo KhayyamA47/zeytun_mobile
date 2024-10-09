@@ -27,6 +27,7 @@ class TextFieldWidget extends StatelessWidget {
   bool onlyNumber;
   bool onChange;
   int maxLines;
+  List<String>? autofillHints;
 
   TextFieldWidget(
       {Key? key,
@@ -42,6 +43,7 @@ class TextFieldWidget extends StatelessWidget {
       this.onSaved,
       this.onlyNumber = false,
       this.borderColor,
+      this.autofillHints,
       this.onChange = false,
       required this.isCollapsed,
       required this.fieldController,
@@ -64,6 +66,7 @@ class TextFieldWidget extends StatelessWidget {
       },
       controller: fieldController,
       obscureText: paswordType,
+      autofillHints: autofillHints,
       style: TextStyle(color: Colors.black),
       textAlignVertical: TextAlignVertical.center,
       inputFormatters: onlyNumber

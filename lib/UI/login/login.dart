@@ -1,6 +1,9 @@
 // ignore_for_file: depend_on_referenced_packages, sized_box_for_whitespace, prefer_const_constructors
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:zeytun_app/global/button.dart';
 import 'package:zeytun_app/global/project_color.dart';
@@ -8,8 +11,16 @@ import 'package:zeytun_app/global/text_field.dart';
 
 import '../../controller/controller_listner.dart/storage_manegment.dart';
 
-class LoginView extends StatelessWidget {
+class LoginView extends StatefulWidget {
   const LoginView({super.key});
+
+  @override
+  State<LoginView> createState() => _LoginViewState();
+}
+
+class _LoginViewState extends State<LoginView> {
+
+
 
   @override
   Widget build(BuildContext context) {

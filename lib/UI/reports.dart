@@ -46,6 +46,7 @@ class _ReportsViewState extends State<ReportsView> {
           await clientDio.get('${NetworkPath.REPORTS.rawValue}?page=$page');
       if (response.statusCode == 200) {
         final data = ReportsModel.fromJson(response.data);
+        log("Kassa qəbzləri data $data");
         setState(() {});
         return data;
       }
@@ -58,7 +59,6 @@ class _ReportsViewState extends State<ReportsView> {
     final userService = UserService();
     user = await userService.getUser();
     setState(() {});
-    log("user== $user");
   }
 
   @override

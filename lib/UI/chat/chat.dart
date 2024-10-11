@@ -70,8 +70,12 @@ Expanded chatList(list) {
               title: Text(list[index].name),
               onTap: () {
                 threadController.thread = list[index];
-                Get.toNamed(AppRoutes.THREAD, arguments: list[index]);
                 threadController.getThread();
+                Get.toNamed(AppRoutes.THREAD, arguments: list[index]);
+
+
+
+
               },
             ),
           ),

@@ -187,7 +187,7 @@ class ProjectDrower extends StatelessWidget {
                               ),
                               Padding(
                                 padding:  EdgeInsets.only(left: 32,top: 12),
-                                child: Text("v 2.3.0"),
+                                child: Text("v 2.3.1"),
                               )
                             ],
                           )))),

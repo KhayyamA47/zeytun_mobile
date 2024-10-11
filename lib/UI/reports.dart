@@ -67,9 +67,9 @@ class _ReportsViewState extends State<ReportsView> {
         appBar: detailAppBar(context, title: "Kassa qəbzləri"),
         body: dataModel == null || user == null
             ? const Center(child: CircularProgressIndicator())
-            : Column(
-                children: [threadBox(dataModel!.data!.messages), input()],
-              ));
+            :Column(
+          children: [threadBox(dataModel!.data!.messages)],
+        ));
   }
 
   input() {

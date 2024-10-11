@@ -74,7 +74,10 @@ class DioInterceptor extends dio.Interceptor {
         handler.next(err);
       }
     } else if (err.response?.statusCode == 404) {
-      Get.back();
+
+      if(!err.requestOptions.uri.toString().contains("https://appzeytunpharm.az/api/thread/messages?thread")){
+        Get.back();
+      }
       Get.defaultDialog(
           title: 'Xəta', middleText: err.response?.data['data']['message']);
     } else {

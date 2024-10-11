@@ -24,34 +24,31 @@ class ThreadController extends GetxController {
   int page = 0;
   bool isLoading = false;
   bool isEnd = false;
-  Thread thread=Thread();
+  Thread thread = Thread();
   TextEditingController messageController = TextEditingController();
 
   Future getThread() async {
-    if (page==0){
+    if (page == 0) {
       chatList.clear();
     }
     isLoading = true;
     log("thread controller get message list start *******");
-    log ("thread id => ${thread.id}");
+    log("thread id => ${thread.id}");
     ChatDataSource().getMessageList(threadId: thread.id).then((value) {
-      log("threadcontroller getchatlist => $value");
-      if (value != null) {
+      log("thread value => $value");
 
-        for (var i = 0; i < value.length; i++) {
-          chatList.add(value[i]);
-        }
-        isLoading = false;
-        if (value.length == 0) {
-          isEnd = true;
-        }
+      for (var i = 0; i < value.length; i++) {
+        chatList.add(value[i]);
+      }
+      isLoading = false;
+      if (value.isEmpty) {
+        isEnd = true;
       }
     });
     return chatList;
   }
 
-
-  void openUrl(String url,context) async {
+  void openUrl(String url, context) async {
     if (await canLaunch(url)) {
       await launch(url);
     } else {
@@ -59,16 +56,18 @@ class ThreadController extends GetxController {
           title: "Xəta",
           subTitle: 'Link açılmadı',
           buttonName: "Aydındır",
-          buttonOnTap: () {
-
-          });
+          buttonOnTap: () {});
     }
   }
+
   Future sendMessage({id}) async {
-    ChatDataSource().sendMessage(threadId:id ?? thread.id!, message: messageController.text).then((value) {
+    ChatDataSource()
+        .sendMessage(
+            threadId: id ?? thread.id!, message: messageController.text)
+        .then((value) {
       log("threadcontroller send message => $value");
       if (value != null) {
-        page=0;
+        page = 0;
         // messageController.clear();
         getThread();
       }

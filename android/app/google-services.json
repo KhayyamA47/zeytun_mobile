@@ -1,36 +1,26 @@
 {
   "project_info": {
-    "project_number": "958083409910",
-    "project_id": "zeytun-4477b",
-    "storage_bucket": "zeytun-4477b.appspot.com"
+    "project_number": "528617087332",
+    "project_id": "zeytunpharmacy-3df8c",
+    "storage_bucket": "zeytunpharmacy-3df8c.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:958083409910:android:0dc2dcc8c4ab62579689d7",
+        "mobilesdk_app_id": "1:528617087332:android:55f2a50d8fedae84c49a71",
         "android_client_info": {
-          "package_name": "az.zeythunpharmacy"
+          "package_name": "az.zeythunpharmacy2"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "958083409910-5p25eteht9v74vd34o7mnofdq7hm7o4p.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDUQfjqA-qHo51jWulnDckKOD-yQcDveeI"
+          "current_key": "AIzaSyBxwaTC54TW9WmVM6rexV9TrGnMQdxh2P0"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "958083409910-5p25eteht9v74vd34o7mnofdq7hm7o4p.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }

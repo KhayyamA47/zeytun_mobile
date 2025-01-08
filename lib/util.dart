@@ -14,7 +14,7 @@ toastMessage(String message) {
 
 checkVersion(BuildContext contct) async {
   const appleId = '1546060765';
-  const playStoreId = 'az.zeythunpharmacy';
+  const playStoreId = 'az.zeythunpharmacy2';
   await AppVersionUpdate.checkForUpdates(
       country: "AZ", appleId: appleId, playStoreId: playStoreId)
       .then((data) async {

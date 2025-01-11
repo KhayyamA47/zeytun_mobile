@@ -30,19 +30,7 @@ class TotalDebtView extends StatelessWidget {
                   color: Colors.white,
                 ),
               )),
-          const SizedBox(width: 10),
-          CircleAvatar(
-              radius: 28,
-              backgroundColor: mainColor,
-              child: IconButton(
-                onPressed: () {
-                  //chat screenini bura elave etmek lazimdi
-                },
-                icon: const Icon(
-                  Icons.chat,
-                  color: Colors.white,
-                ),
-              )),
+
         ],
       ),
       appBar: detailAppBar(
